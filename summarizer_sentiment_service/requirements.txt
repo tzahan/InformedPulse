@@ -1,0 +1,9 @@
+# ctransformers
+# sentence-transformers
+# langchain
+# langchain-community
+python-dotenv
+google-generativeai
+fastapi
+uvicorn
+
