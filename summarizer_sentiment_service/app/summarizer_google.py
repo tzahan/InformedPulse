@@ -6,7 +6,6 @@ import os
 load_dotenv()
 
 openai_api_key=os.getenv('GOOGLE_API_KEY')
-print(openai_api_key)
 genai.configure(api_key=openai_api_key)
 
 def summarize_text(input_text, max_tokens=300):
