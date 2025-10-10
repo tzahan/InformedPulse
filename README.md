@@ -20,7 +20,7 @@ It integrates features like summarization, sentiment analysis, bias detection, a
 ![image alt](https://github.com/tzahan/InformedPulse/blob/75ee57561950f0cd8d101af784abe9c0bb98827f/high_level_architecture.png)
 
 ### 2️⃣ System Architecture 
-![image alt](https://github.com/tzahan/InformedPulse/blob/393d5b0e3c5f4ebeb632f659f6980e906650b603/system_architecture.jpg)
+![image alt](https://github.com/tzahan/InformedPulse/blob/1f859940b54338149ce04b2236afb1dfbaacf96f/system_architecture.png)
 
 ---
 
@@ -52,14 +52,12 @@ source venv/bin/activate     # For Windows: venv\Scripts\activate
 pip install -r requirements.txt  
 ```  
 ### 3️⃣ Configure Environment Variables  
-Create a .env file in each service directory or copy from the example file:
-```bash  
-cp .env.example .env 
-```
-Then edit the .env file as shown below:
+Set up environment variables for the backend and microservices in a `.env` file:
 ```env  
 # Database
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/informed-pulse?retryWrites=true&w=majority
+MONGO_USERNAME=your_mongoDB_username
+MONGO_PASSWORD=your_mongoDB_password
+# MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/informed-pulse?retryWrites=true&w=majority
 
 # Authentication
 JWT_SECRET_KEY=replace-with-strong-secret
@@ -139,3 +137,6 @@ Access the auto-generated API documentation here:
 
 ---
 
+**Author:** Tasnim Zahan   
+**Email:** zahan.tasnim@gmail.com  
+**GitHub:** [tzahan](https://github.com/tzahan)
