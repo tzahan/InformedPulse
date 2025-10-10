@@ -1,111 +1,141 @@
+# 💡 Informed Pulse – AI-Powered News Analysis Platform
 
-# Informed Pulse Backend and Microservices  
+**Informed Pulse** is an **AI-powered news analysis platform** that leverages **LLM-based natural language processing** and **microservice architecture** to deliver personalized and insightful news content.  
 
-Informed Pulse is a comprehensive news analysis platform. It includes a main backend API along with dedicated microservices for summarization, bias analysis and recommendation, creating a scalable and modular architecture.  
+It integrates features like summarization, sentiment analysis, bias detection, and personalized recommendations — all served through a scalable **FastAPI-based RESTful backend**.
 
-## Features  
-- **Backend API**:  
-  - User management (registration, login, JWT-based authentication).  
-  - Personalized news recommendations based on user preferences and interaction data.  
-  - User interaction tracking.  
-- **Summarizer Microservice**:  
-  - Generates concise summaries for news articles along with sentiment score.  
-  - Utilizes the Gemini API.  
-- **Recommender Microservice**:  
-  - Calculates news similarity using embedding models.  
-  - Delivers personalized recommendations.  
-- **Bias Analysis Microservice**:  
-  - Analyzes news articles for content bias, including framing, tone, and selective details.
-  - Provides a bias score and detailed explanations using LLM-based models.
+---
 
-## Tech Stack  
-- **Backend and Microservices**: Python FastAPI   
-- **Database**: MongoDB  
-- **Authentication**: JWT-based authentication  
-- **External APIs**: Google Cloud Embedding API, Gemini API  
-- **Containerization**: Docker  
+## 🚀 Key Features
 
-## Installation  
+- **Personalized News Recommendations** – Tailored content suggestions based on user preferences and interaction data.
+- **AI-Powered NLP Services** – Automated text summarization, sentiment analysis, and bias detection using Gemini and Google Cloud APIs.
+- **Secure Authentication** – User registration and login supported by JWT-based authentication.
+- **Modular Microservices Architecture** – Independent AI services ensure scalability and maintainability.
+- **Containerized & Cloud-Ready** – Dockerized services deployable to Azure App Service or other cloud platforms.
 
-### Prerequisites  
-- Python 3.9+  
-- MongoDB instance (local or cloud).  
-- Docker (optional for containerized deployment).  
+---
+## 🧩 Architecture Overview
+### 1️⃣ High-level Architecture
+![image alt](https://github.com/tzahan/InformedPulse/blob/75ee57561950f0cd8d101af784abe9c0bb98827f/high_level_architecture.png)
 
-### Steps  
-1. Clone the repository:  
-   ```bash  
-   git clone https://github.com/tzahan/InformedPulse.git  
-   cd InformedPulse/informed-pulse-backend   # For backend service
-   cd InformedPulse/personalized_recommendation   # For recommender system
-   cd InformedPulse/semmarizer_sentiment_service   # For summarization and sentiment analysis
-   cd InformedPulse/bias_analysis_service    # For bias analizer
-   ```  
+### 2️⃣ System Architecture 
+![image alt](https://github.com/tzahan/InformedPulse/blob/393d5b0e3c5f4ebeb632f659f6980e906650b603/system_architecture.jpg)
 
-2. Set up a virtual environment:  
-   ```bash  
-   python -m venv venv  
-   source venv/bin/activate  # On Windows: venv\Scripts\activate  
-   ```  
+---
 
-3. Install dependencies:  
-   ```bash  
-   pip install -r requirements.txt  
-   ```  
+## ⚙️ Tech Stack
 
-4. Set up environment variables for the backend and microservices in a `.env` file:  
-   ```env  
-   # Backend API  
-   JWT_SECRET_KEY=your-secret-key
-   MONGO_USERNAME=your_mongoDB_username>
-   MONGO_PASSWORD=your_mongoDB_password>
-   GENAI_API_KEY=your-google-cloud-api-key  
+| Component | Technology |
+|------------|-------------|
+| **Backend Framework** | FastAPI (Python 3.9+) |
+| **Database** | MongoDB |
+| **AI APIs** | Gemini API, Google Cloud Embedding API |
+| **Authentication** | JWT (JSON Web Token) |
+| **Deployment** | Docker, Azure App Service |
+| **Architecture** | Microservices (REST APIs) |
 
-   # Recommender Microservice  
-   MONGO_USERNAME=your_mongoDB_username>
-   MONGO_PASSWORD=your_mongoDB_password>
-   GENAI_API_KEY=your-google-cloud-api-key  
+---
 
-   # Summarizer and Bias Analysis Microservices
-   GENAI_API_KEY=your-google-cloud-api-key   
-   ```  
+## 📦 Installation & Setup
 
-5. Start the services:   
-   ```bash  
-   uvicorn app.main:app --host 0.0.0.0 --port 8000   
-   ```  
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/tzahan/InformedPulse.git
+cd InformedPulse
+```  
+### 2️⃣ Backend Setup 
+```bash  
+cd informed-pulse-backend
+python -m venv venv
+source venv/bin/activate     # For Windows: venv\Scripts\activate
+pip install -r requirements.txt  
+```  
+### 3️⃣ Configure Environment Variables  
+Create a .env file in each service directory or copy from the example file:
+```bash  
+cp .env.example .env 
+```
+Then edit the .env file as shown below:
+```env  
+# Database
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/informed-pulse?retryWrites=true&w=majority
 
-### Run with Docker  
-1. Build the Docker image (navigate to the required service folder):  
-   ```bash  
-   docker build -t <docker_image_name> .  
+# Authentication
+JWT_SECRET_KEY=replace-with-strong-secret
 
-2. Run the container:  
-   ```bash  
-   docker run -d -p 8000:8000 --env-file .env <docker_image_name>
-   ```  
+# External APIs
+GEMINI_API_KEY=your-gemini-api-key
+GOOGLE_EMBEDDING_API_KEY=your-google-embedding-api-key
 
-## Example of API Endpoints  
+# Service Ports
+BACKEND_PORT=8000
+RECOMMENDER_PORT=8001
+SUMMARIZER_PORT=8002
+BIAS_PORT=8003
+```
 
-### Backend API  
-| Method | Endpoint                | Description                           |  
-|--------|-------------------------|---------------------------------------|  
-| POST   | `/user/register`        | Register a new user                   |  
-| POST   | `/auth/login`           | Login and get a JWT token             |  
-| POST   | `/user/add-interaction` | Add user interaction data (news ID)   |  
-| GET    | `user/recommendations`  | Get personalized news recommendations |  
+---
 
-### Recommender Microservice  
-| Method | Endpoint             | Description                                                    |  
-|--------|----------------------|----------------------------------------------------------------|  
-| POST   | `/recommendations`   | Fetch recommendations based on user preference and interactions|  
+## ▶️ Run Locally (Manual)
+```bash
+# Backend
+cd informed-pulse-backend
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-### Summarizer Microservice  
-| Method | Endpoint             | Description                        |  
-|--------|----------------------|------------------------------------|  
-| POST   | `/summarize`         | Generate news summaries.           |  
+# Recommender
+cd ../personalized_recommendation
+uvicorn recommender.main:app --host 0.0.0.0 --port 8001 --reload
 
-### Bias Analysis Microservice  
-| Method | Endpoint             | Description                        |  
-|--------|----------------------|------------------------------------|  
-| POST   | `/analyze_bias`         | Provide bias analysis result.   |  
+# Summarizer & Sentiment
+cd ../summarizer_sentiment_service
+uvicorn summarizer.main:app --host 0.0.0.0 --port 8002 --reload
+
+# Bias Analyzer
+cd ../bias_analyzer_service
+uvicorn bias.main:app --host 0.0.0.0 --port 8003 --reload
+```
+
+---
+
+## 🐳 Run with Docker Compose
+This project includes a preconfigured **`docker-compose.yml`** file for running all microservices together.  
+It automatically builds and starts the following services:
+- Backend API (FastAPI)
+- Personalized Recommender
+- Summarizer & Sentiment Analyzer
+- Bias Analyzer
+
+### ▶️ Start All Services
+
+Run the following command from the project root:
+
+```bash
+docker-compose up --build
+```
+This will:
+- Build Docker images for all services
+- Start containers on ports 8000–8003
+- Automatically link services within the same Docker network
+
+Once started, you can access the backend at:
+👉 http://localhost:8000
+
+---
+
+## 📚 API Endpoints
+
+| Service | Method | Endpoint | Description |
+|----------|---------|-----------|--------------|
+| **User** | `POST` | `/user/register` | Register a new user |
+| **User** | `POST` | `/auth/login` | Authenticate user and return JWT |
+| **Recommender** | `GET` | `/user/recommendations` | Retrieve personalized article recommendations |
+| **Summarizer** | `POST` | `/summarize` | Generate AI-based article summary |
+| **Sentiment** | `POST` | `/sentiment` | Analyze sentiment of article text |
+| **Bias Analyzer** | `POST` | `/analyze_bias` | Detect bias or political leaning in text |
+
+Access the auto-generated API documentation here:  
+👉 [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
