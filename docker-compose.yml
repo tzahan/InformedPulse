@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  backend:
+    build: ./informed-pulse-backend
+    ports:
+      - "8000:8000"
+    env_file: ./informed-pulse-backend/.env
+    depends_on:
+      - recommender
+      - summarizer
+      - bias
+    networks:
+      - informedpulse
+
+  recommender:
+    build: ./personalized_recommendation
+    ports:
+      - "8001:8001"
+    env_file: ./personalized_recommendation/.env
+    networks:
+      - informedpulse
+
+  summarizer:
+    build: ./summarizer_sentiment_service
+    ports:
+      - "8002:8002"
+    env_file: ./summarizer_sentiment_service/.env
+    networks:
+      - informedpulse
+
+  bias:
+    build: ./bias_analyzer_service
+    ports:
+      - "8003:8003"
+    env_file: ./bias_analyzer_service/.env
+    networks:
+      - informedpulse
+
+networks:
+  informedpulse:
+    driver: bridge
